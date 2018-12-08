@@ -17,9 +17,13 @@ namespace Shop_SoftlyCompany.Classes
         public string Description { get; set; }
 
         static string MyConnection = ConfigurationManager.ConnectionStrings["connString"].ConnectionString;
+        public MySqlConnection MakeConn() {
+            MySqlConnection conn = new MySqlConnection(MyConnection);
+            return conn;
+        }
         public DataTable Select()
         {
-            MySqlConnection conn = new MySqlConnection(MyConnection);
+            MySqlConnection conn = MakeConn();
             DataTable dt = new DataTable();
             try
             {
@@ -41,7 +45,7 @@ namespace Shop_SoftlyCompany.Classes
         public bool Insert(Catelog c)
         {
             bool isSuccess = false;
-            MySqlConnection conn = new MySqlConnection(MyConnection);
+            MySqlConnection conn = MakeConn();
             try
             {
                 conn.Open();
