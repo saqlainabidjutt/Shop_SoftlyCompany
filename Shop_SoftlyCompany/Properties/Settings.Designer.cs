@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Shop_SoftlyCompany.Properties
+namespace Shop_TPV.Properties
 {
 
 

@@ -1,73 +1,49 @@
-﻿using MySql.Data.MySqlClient;
+﻿using Shop_SoftlyCompany.DB;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Reflection;
+using System.Resources;
 
-namespace Shop_SoftlyCompany.Classes
+namespace Shop_TPV.Classes
 {
     class Catelog
     {
-
-        public int CatelogId { get; set; }
+       // private static readonly ResourceManager rm = new ResourceManager("Shop_TPV.Resources", Assembly.GetExecutingAssembly());
+        private CatelogDB cateDB=new CatelogDB();
+        public Catelog()
+        {
+            this.ShopId = 1;
+        }
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+        public int SubFam { get; set; }
+        public float Dto { get; set; }
+        public string Status { get; set; }
+        public int ShopId { get; set; }
 
-        static string MyConnection = ConfigurationManager.ConnectionStrings["connString"].ConnectionString;
-        public MySqlConnection MakeConn() {
-            MySqlConnection conn = new MySqlConnection(MyConnection);
-            return conn;
-        }
         public DataTable Select()
         {
-            MySqlConnection conn = MakeConn();
-            DataTable dt = new DataTable();
-            try
-            {
-                string sql = "select * from catelogs";
-                MySqlCommand cmd = new MySqlCommand(sql, conn);
-                MySqlDataAdapter adp = new MySqlDataAdapter(cmd);
-                conn.Open();
-                adp.Fill(dt);
-            }
-            catch(Exception ex)
-            {
-            }
-            finally
-            {
-                conn.Close();
-            }
-            return dt;
+            return cateDB.Select(ShopId);
         }
         public bool Insert(Catelog c)
         {
-            bool isSuccess = false;
-            MySqlConnection conn = MakeConn();
-            try
-            {
-                conn.Open();
-                string sql = "insert into catelogs (Name, description) Values (@Name, @description)";
-                MySqlCommand cmd = new MySqlCommand(sql, conn);
-                cmd.Parameters.AddWithValue("@Name",c.Name);
-                cmd.Parameters.AddWithValue("@description", c.Description);            
-                int row = cmd.ExecuteNonQuery();
-                if (row > 0)
-                {
-                    isSuccess = true;
-                }
-            }
-            catch (Exception ex)
-            {
-            }
-            finally
-            {
-                conn.Close();
-            }
-            return isSuccess;
-
+            return cateDB.Insert(c);
         }
+        public bool Update(Catelog c)
+        {
+            return cateDB.Update(c);
+        }
+        public DataTable Search(Catelog c)
+        {
+            return cateDB.Search(c);
+        }
+        public DataTable Search(string label, string keyword, string orderby)
+        {
+            return cateDB.Search(label, keyword, orderby);
+        }
+
     }
 }

@@ -59,27 +59,70 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\Address.cs" />
     <Compile Include="Classes\Catelog.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="Classes\Shop.cs" />
+    <Compile Include="DB\Connection.cs" />
+    <Compile Include="DB\DBAddress.cs" />
+    <Compile Include="DB\DBCatelog.cs" />
+    <Compile Include="DB\DBShop.cs" />
+    <Compile Include="Pages\Catelogs.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Pages\Catelogs.Designer.cs">
+      <DependentUpon>Catelogs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Dashboard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pages\Dashboard.Designer.cs">
+      <DependentUpon>Dashboard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Shops.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pages\Shops.Designer.cs">
+      <DependentUpon>Shops.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ShopView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pages\ShopView.Designer.cs">
+      <DependentUpon>ShopView.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Resources\resources1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>resources.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Pages\Catelogs.resx">
+      <DependentUpon>Catelogs.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.resx">
+    <EmbeddedResource Include="Pages\Dashboard.resx">
+      <DependentUpon>Dashboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lang\en_uk.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <LastGenOutput>en_uk.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
+    <Compile Include="Lang\en_uk.Designer.cs">
       <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
+      <DependentUpon>en_uk.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Pages\Shops.resx">
+      <DependentUpon>Shops.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\ShopView.resx">
+      <DependentUpon>ShopView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>resources1.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -98,6 +141,9 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Icon1.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
