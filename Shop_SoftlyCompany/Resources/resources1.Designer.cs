@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Shop_SoftlyCompany.Resources {
+namespace Shop_TPV.Resources {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Shop_SoftlyCompany.Resources {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Shop_SoftlyCompany.Resources.resources", typeof(resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Shop_TPV.Resources.resources", typeof(resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

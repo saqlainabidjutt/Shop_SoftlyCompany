@@ -1,13 +1,10 @@
 ﻿using Shop_TPV.Classes;
 using System;
 using MySql.Data.MySqlClient;
-using System.Collections.Generic;
-using System.Configuration;
 using System.Data;
-using Shop_TPV.DB;
 using System.Windows.Forms;
 
-namespace Shop_SoftlyCompany.DB
+namespace Shop_TPV.DB
 {
 
     class CatelogDB

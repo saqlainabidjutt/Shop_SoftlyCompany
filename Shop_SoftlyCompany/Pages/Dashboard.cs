@@ -1,16 +1,6 @@
 ﻿using Shop_SoftlyCompany.Pages;
-using Shop_TPV.Classes;
 using Shop_TPV.Pages;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Reflection;
-using System.Resources;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Shop_TPV
@@ -67,6 +57,18 @@ namespace Shop_TPV
         {
             Catelogs catelogs = new Catelogs();
             catelogs.Show();
+        }
+
+        private void productsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Productes productes = new Productes();
+            productes.Show();
+        }
+
+        private void suppliersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Suppliers supp = new Suppliers();
+            supp.Show();
         }
     }
 }

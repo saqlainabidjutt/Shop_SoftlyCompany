@@ -61,11 +61,16 @@
   <ItemGroup>
     <Compile Include="Classes\Address.cs" />
     <Compile Include="Classes\Catelog.cs" />
+    <Compile Include="Classes\Enum_Global.cs" />
+    <Compile Include="Classes\Product.cs" />
     <Compile Include="Classes\Shop.cs" />
+    <Compile Include="Classes\Supplier.cs" />
     <Compile Include="DB\Connection.cs" />
     <Compile Include="DB\DBAddress.cs" />
     <Compile Include="DB\DBCatelog.cs" />
+    <Compile Include="DB\DBProduct.cs" />
     <Compile Include="DB\DBShop.cs" />
+    <Compile Include="DB\DBSuppliers.cs" />
     <Compile Include="Pages\Catelogs.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -78,6 +83,12 @@
     <Compile Include="Pages\Dashboard.Designer.cs">
       <DependentUpon>Dashboard.cs</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Productes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pages\Productes.Designer.cs">
+      <DependentUpon>Productes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Shops.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -89,6 +100,12 @@
     </Compile>
     <Compile Include="Pages\ShopView.Designer.cs">
       <DependentUpon>ShopView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Suppliers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pages\Suppliers.Designer.cs">
+      <DependentUpon>Suppliers.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -113,11 +130,17 @@
       <DependentUpon>en_uk.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Pages\Productes.resx">
+      <DependentUpon>Productes.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Pages\Shops.resx">
       <DependentUpon>Shops.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pages\ShopView.resx">
       <DependentUpon>ShopView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\Suppliers.resx">
+      <DependentUpon>Suppliers.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

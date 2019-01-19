@@ -5,10 +5,10 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using Shop_TPV.DB;
-using Shop_SoftlyCompany.Classes;
+using Shop_TPV.Classes;
 using System.Windows.Forms;
 
-namespace Shop_SoftlyCompany.DB
+namespace Shop_TPV.DB
 {
     class DBAddress
     {

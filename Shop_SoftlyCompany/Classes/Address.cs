@@ -1,11 +1,11 @@
-﻿using Shop_SoftlyCompany.DB;
+﻿using Shop_TPV.DB;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Shop_SoftlyCompany.Classes
+namespace Shop_TPV.Classes
 {
     class Address
     {

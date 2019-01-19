@@ -9,32 +9,32 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Shop_TPV.Pages
+namespace Shop_SoftlyCompany.Pages
 {
-    public partial class Shops : Form
+    public partial class Suppliers : Form
     {
-        Shop sh = new Shop();
-        DataTable dtShop;
+        Supplier sp = new Supplier();
+        DataTable dtSupp;
         bool FreadOnly = false;
         private string searchLbTxt = "";
-        public Shops()
+        public Suppliers()
         {
             InitializeComponent();
         }
         private void RefreshData()
         {
-            dtShop = sh.Select();
-            dShops.DataSource = dtShop;
+            dtSupp = sp.Select();
+            dSupp.DataSource = dtSupp;
         }
-        private void ValuesCambo(List<Label> labels,String action)
+        private void ValuesCambo(List<Label> labels, String action)
         {
             foreach (var lbl in labels)
             {
-                if (lbl.Name.StartsWith("lab") && action=="load")
+                if (lbl.Name.StartsWith("lab") && action == "load")
                 {
                     SearchLab.Items.Add(lbl.Text);
                 }
-                if (lbl.Text== SearchLab.GetItemText(SearchLab.SelectedItem) && action == "search")
+                if (lbl.Text == SearchLab.GetItemText(SearchLab.SelectedItem) && action == "search")
                 {
                     //.GetItemText(this.ComboBox.SelectedItem)
                     var tmp = lbl.Name.Substring(3);
@@ -44,11 +44,11 @@ namespace Shop_TPV.Pages
                 }
             }
         }
-        private void Shops_Load(object sender, EventArgs e)
+        private void Suppliers_Load(object sender, EventArgs e)
         {
             RefreshData();
-            List<Label> labels = this.groupShop.Controls.OfType<Label>().ToList();
-            ValuesCambo(labels,"load");
+            List<Label> labels = this.groupSupp.Controls.OfType<Label>().ToList();
+            ValuesCambo(labels, "load");
             labels = this.groupAddr.Controls.OfType<Label>().ToList();
             ValuesCambo(labels, "load");
         }
@@ -70,27 +70,31 @@ namespace Shop_TPV.Pages
             addr.country = addrCountry.Text;
             return addr;
         }
-        private Shop getShopValues()
+        private Supplier getSuppValues()
         {
-            Shop s = new Shop();
-            s.name = shopName.Text;
-            s.identity = shopIdentity.Text;
-            s.status = shopStatus.Text;
-            return s;
+            Supplier sup = new Supplier();
+            sup.Name = suppName.Text;
+            sup.Fname = suppFName.Text;
+            sup.Lname = suppLName.Text;
+            sup.UserIdentity = suppIdentity.Text;
+            sup.Email = suppEmail.Text;
+            sup.Status = suppStatus.Text;
+            return sup;
         }
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            if (permission()) { 
+            if (permission())
+            {
                 Address addr = new Address();
                 addr = getAdressValues();
                 long addrId = addr.Insert(addr);
-                if (addrId!=0)
+                if (addrId != 0)
                 {
-                    Shop s = new Shop();
-                    s = getShopValues();
-                    s.addrId = (int)addrId;
+                    Supplier s = new Supplier();
+                    s = getSuppValues();
+                    s.AddrId = (int)addrId;
                     bool success = s.Insert(s);
-                    if(success)
+                    if (success)
                     {
                         clear();
                         RefreshData();
@@ -116,33 +120,44 @@ namespace Shop_TPV.Pages
         }
         private void clear()
         {
-            List<TextBox> txtbxs = this.groupShop.Controls.OfType<TextBox>().ToList();
+            List<TextBox> txtbxs = this.groupSupp.Controls.OfType<TextBox>().ToList();
             clear(txtbxs);
             txtbxs = this.groupAddr.Controls.OfType<TextBox>().ToList();
             clear(txtbxs);
-            shopStatus.Text = "";
+            suppStatus.Text = "";
             searchKeyword.Text = "";
             SearchLab.Text = "";
             OrderBy.Text = "";
 
         }
-        private void dShops_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+
+        private void label1_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private void dSupp_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            //S.ID,S.NAME as Name,S.FIRSTNAME as FirstName,S.LASTNAME as LastName,S.USER_IDENTITY,S.EMAIL as Email,S.STATUS,
+            //7:A.TELEFON,A.STREET,A.BUILDINGNUM,A.FLOOR,A.DOORNUM,A.POSTALCODE,A.CITY,A.PROVENCE,A.COUNTRY,A.ID as Address_Id"
             int row_ind = e.RowIndex;
-            shopIdtxt.Text = dShops.Rows[row_ind].Cells[0].Value.ToString();
-            addrId.Text = dShops.Rows[row_ind].Cells[13].Value.ToString();
-            shopName.Text = dShops.Rows[row_ind].Cells[1].Value.ToString();
-            shopIdentity.Text = dShops.Rows[row_ind].Cells[2].Value.ToString();
-            shopStatus.Text = dShops.Rows[row_ind].Cells[3].Value.ToString();
-            addrTelefon.Text = dShops.Rows[row_ind].Cells[4].Value.ToString();
-            addrStreet.Text = dShops.Rows[row_ind].Cells[5].Value.ToString();
-            addrBuildingNum.Text = dShops.Rows[row_ind].Cells[6].Value.ToString();
-            addrFloor.Text = dShops.Rows[row_ind].Cells[7].Value.ToString();
-            addrDoor.Text = dShops.Rows[row_ind].Cells[8].Value.ToString();
-            addrPostalCode.Text = dShops.Rows[row_ind].Cells[9].Value.ToString();
-            addrCity.Text = dShops.Rows[row_ind].Cells[10].Value.ToString();
-            addrProvence.Text = dShops.Rows[row_ind].Cells[11].Value.ToString();
-            addrCountry.Text = dShops.Rows[row_ind].Cells[12].Value.ToString();
+            suppIdtxt.Text = dSupp.Rows[row_ind].Cells[0].Value.ToString();
+            addrId.Text = dSupp.Rows[row_ind].Cells[16].Value.ToString();
+            suppName.Text = dSupp.Rows[row_ind].Cells[1].Value.ToString();
+            suppFName.Text = dSupp.Rows[row_ind].Cells[2].Value.ToString();
+            suppLName.Text = dSupp.Rows[row_ind].Cells[3].Value.ToString();
+            suppIdentity.Text = dSupp.Rows[row_ind].Cells[4].Value.ToString();
+            suppEmail.Text = dSupp.Rows[row_ind].Cells[5].Value.ToString();
+            suppStatus.Text = dSupp.Rows[row_ind].Cells[6].Value.ToString();
+            addrTelefon.Text = dSupp.Rows[row_ind].Cells[7].Value.ToString();
+            addrStreet.Text = dSupp.Rows[row_ind].Cells[8].Value.ToString();
+            addrBuildingNum.Text = dSupp.Rows[row_ind].Cells[9].Value.ToString();
+            addrFloor.Text = dSupp.Rows[row_ind].Cells[10].Value.ToString();
+            addrDoor.Text = dSupp.Rows[row_ind].Cells[11].Value.ToString();
+            addrPostalCode.Text = dSupp.Rows[row_ind].Cells[12].Value.ToString();
+            addrCity.Text = dSupp.Rows[row_ind].Cells[13].Value.ToString();
+            addrProvence.Text = dSupp.Rows[row_ind].Cells[14].Value.ToString();
+            addrCountry.Text = dSupp.Rows[row_ind].Cells[15].Value.ToString();
         }
 
         private void Update_Click(object sender, EventArgs e)
@@ -154,9 +169,9 @@ namespace Shop_TPV.Pages
                 addr.Id = Convert.ToInt32(addrId.Text);
                 if (addr.Update(addr))
                 {
-                    Shop s = new Shop();
-                    s = getShopValues();
-                    s.Id = Convert.ToInt32(shopIdtxt.Text);
+                    Supplier s = new Supplier();
+                    s = getSuppValues();
+                    s.Id = Convert.ToInt32(suppIdtxt.Text);
                     bool success = s.Update(s);
                     if (success)
                     {
@@ -182,10 +197,10 @@ namespace Shop_TPV.Pages
             {
                 Address addr = new Address();
                 addr = getAdressValues();
-                Shop s = new Shop();
-                s = getShopValues();
-                dtShop = sh.Search(s, addr);
-                dShops.DataSource = dtShop;
+                Supplier s = new Supplier();
+                s = getSuppValues();
+                dtSupp = sp.Search(s, addr);
+                dSupp.DataSource = dtSupp;
             }
         }
 
@@ -194,19 +209,20 @@ namespace Shop_TPV.Pages
             clear();
             RefreshData();
         }
-        private void ReadOnlyAct(List<TextBox> txtbxs,bool act)
+        private void ReadOnlyAct(List<TextBox> txtbxs, bool act)
         {
             foreach (var txtbx in txtbxs)
             {
                 txtbx.ReadOnly = act;
             }
-            shopIdtxt.ReadOnly = true;
+            suppIdtxt.ReadOnly = true;
             addrId.ReadOnly = true;
-            shopStatus.Enabled = !act;
+            suppStatus.Enabled = !act;
         }
+
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            List<TextBox> txtbxs = this.groupShop.Controls.OfType<TextBox>().ToList();
+            List<TextBox> txtbxs = this.groupSupp.Controls.OfType<TextBox>().ToList();
             ReadOnlyAct(txtbxs, FreadOnly);
             txtbxs = this.groupAddr.Controls.OfType<TextBox>().ToList();
             ReadOnlyAct(txtbxs, FreadOnly);
@@ -219,36 +235,23 @@ namespace Shop_TPV.Pages
                 this.FreadOnly = true;
             }
         }
-
-        private void Telefon_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void addrTelefon_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Identity_Click(object sender, EventArgs e)
-        {
-
-        }
         private void DoSearch()
         {
-            List<Label> labels = this.groupShop.Controls.OfType<Label>().ToList();
+            List<Label> labels = this.groupSupp.Controls.OfType<Label>().ToList();
             ValuesCambo(labels, "search");
             labels = this.groupAddr.Controls.OfType<Label>().ToList();
             ValuesCambo(labels, "search");
-            dtShop = sh.Search(this.searchLbTxt, searchKeyword.Text, OrderBy.GetItemText(OrderBy.SelectedItem));
-            dShops.DataSource = dtShop;
+            dtSupp = sp.Search(this.searchLbTxt, searchKeyword.Text, OrderBy.GetItemText(OrderBy.SelectedItem));
+            dSupp.DataSource = dtSupp;
             this.searchLbTxt = "";
         }
         private void SearchLab_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (SearchLab.GetItemText(SearchLab.SelectedItem)!="" && searchKeyword.Text != "") { 
-                 DoSearch();
-            }if(SearchLab.GetItemText(SearchLab.SelectedItem) != "" && OrderBy.GetItemText(OrderBy.SelectedItem) != "")
+            if (SearchLab.GetItemText(SearchLab.SelectedItem) != "" && searchKeyword.Text != "")
+            {
+                DoSearch();
+            }
+            if (SearchLab.GetItemText(SearchLab.SelectedItem) != "" && OrderBy.GetItemText(OrderBy.SelectedItem) != "")
             {
                 DoSearch();
             }

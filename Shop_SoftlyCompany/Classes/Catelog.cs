@@ -1,10 +1,5 @@
-﻿using Shop_SoftlyCompany.DB;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
+﻿using Shop_TPV.DB;
 using System.Data;
-using System.Reflection;
-using System.Resources;
 
 namespace Shop_TPV.Classes
 {
@@ -14,7 +9,8 @@ namespace Shop_TPV.Classes
         private CatelogDB cateDB=new CatelogDB();
         public Catelog()
         {
-            this.ShopId = 1;
+            this.ShopId = this.ShopId = (int)ShopIdValue.ShopId;
+            this.Dto = 0;
         }
         public int Id { get; set; }
         public string Name { get; set; }

@@ -1,4 +1,4 @@
-﻿namespace Shop_SoftlyCompany.Pages
+﻿namespace Shop_TPV.Pages
 {
     partial class ShopView
     {

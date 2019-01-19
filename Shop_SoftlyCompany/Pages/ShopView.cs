@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Shop_SoftlyCompany.Pages
+namespace Shop_TPV.Pages
 {
     public partial class ShopView : Form
     {

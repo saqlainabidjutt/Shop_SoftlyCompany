@@ -1,15 +1,11 @@
 ﻿using Shop_TPV.Classes;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Shop_SoftlyCompany.Pages
+namespace Shop_TPV.Pages
 {
     public partial class Catelogs : Form
     {
@@ -30,13 +26,41 @@ namespace Shop_SoftlyCompany.Pages
         {
             return this.FreadOnly;
         }
+        private String ValidateData(Catelog c,string operation)
+        {
+            string err = "OK";
+            if(operation=="add" || operation == "update")
+            {
+                if (c.Name == "") {
+                    err = "Name is  a required Field.";
+                }
+                if (c.Status == "")
+                {
+                    err = "Status is  a required Field.";
+                }
+            }
+            if (operation == "search")
+            {
+                if (c.Name == "" && c.Description == "" && c.Dto==0 && c.Status == "")
+                {
+                    err = "Write something to perfourm search.";
+                }
+            }
+            return err;
+        }
         private Catelog getCatelogsValues()
         {
             Catelog cate = new Catelog();
             cate.Name = catelogNametxt.Text;
             cate.Description = catelogDestxt.Text;
-            cate.Dto = Convert.ToSingle(catelogDto.Text);
-            cate.Status = catelogStatus.Text;
+            if (catelogDto.Text != "") { 
+                cate.Dto = Convert.ToSingle(catelogDto.Text);
+            }
+            if (CatelogIdtxt.Text != "")
+            {
+                cate.Id = Convert.ToInt32(CatelogIdtxt.Text);
+            }
+                cate.Status = catelogStatus.Text;
             return cate;
         }
         private void btnAdd_Click(object sender, EventArgs e)
@@ -45,16 +69,23 @@ namespace Shop_SoftlyCompany.Pages
             {
                 Catelog c = new Catelog();
                 c = getCatelogsValues();
-                bool success = c.Insert(c);
-                if (success)
-                {
-                    clear();
-                    RefreshData();
-                    MessageBox.Show("Catelog Inserted Successfully!");
+                string validation = ValidateData(c, "add");
+                if (validation == "OK") { 
+                    bool success = c.Insert(c);
+                    if (success)
+                    {
+                        clear();
+                        RefreshData();
+                        MessageBox.Show("Catelog Inserted Successfully!");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error!");
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Error!");
+                    MessageBox.Show(validation);
                 }
             }
         }
@@ -114,11 +145,11 @@ namespace Shop_SoftlyCompany.Pages
         {
             List<TextBox> txtbxs = this.groupBox1.Controls.OfType<TextBox>().ToList();
             clear(txtbxs);
+            //do Not Remove
             catelogStatus.Text = "";
             searchKeyword.Text = "";
             SearchLab.Text = "";
             OrderBy.Text = "";
-
         }
         private void Refresh_Click(object sender, EventArgs e)
         {
@@ -140,20 +171,36 @@ namespace Shop_SoftlyCompany.Pages
         {
             if (permission())
             {
-                    Catelog c = new Catelog();
+
+                Catelog c = new Catelog();
+                if (CatelogIdtxt.Text != "")
+                {
                     c = getCatelogsValues();
                     c.Id = Convert.ToInt32(CatelogIdtxt.Text);
-                    bool success = c.Update(c);
-                    if (success)
+                    string validation = ValidateData(c, "update");
+                    if (validation == "OK")
                     {
-                        clear();
-                        RefreshData();
-                        MessageBox.Show("Catelog Updated Successfully!");
+                        bool success = c.Update(c);
+                        if (success)
+                        {
+                            clear();
+                            RefreshData();
+                            MessageBox.Show("Catelog Updated Successfully!");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Error! in Updated Catelog");
+                        }
                     }
                     else
                     {
-                        MessageBox.Show("Error! in Updated Shop");
+                        MessageBox.Show(validation);
                     }
+                }
+                else
+                {
+                    MessageBox.Show("Data not Exist!");
+                }
             }
         }
 
@@ -163,7 +210,15 @@ namespace Shop_SoftlyCompany.Pages
             {
                 Catelog c = new Catelog();
                 c = getCatelogsValues();
-                dtCate = c.Search(c);
+                string validation = ValidateData(c, "search");
+                if (validation == "OK")
+                {
+                    dtCate = c.Search(c);
+                }
+                else
+                {
+                    MessageBox.Show(validation);
+                }
                 dtCatelog.DataSource = dtCate;
             }
         }
@@ -182,6 +237,10 @@ namespace Shop_SoftlyCompany.Pages
                 DoSearch();
             }
             if (SearchLab.GetItemText(SearchLab.SelectedItem) != "" && OrderBy.GetItemText(OrderBy.SelectedItem) != "")
+            {
+                DoSearch();
+            }
+            if (searchKeyword.Text != "" && SearchLab.GetItemText(SearchLab.SelectedItem) == "" && OrderBy.GetItemText(OrderBy.SelectedItem) == "")
             {
                 DoSearch();
             }
